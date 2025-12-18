@@ -3,6 +3,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: {
     index: "src/index.ts",
+    "hooks/smart-install": "src/hooks/smart-install.ts",
     "hooks/session-start": "src/hooks/session-start.ts",
     "hooks/post-tool-use": "src/hooks/post-tool-use.ts",
     "hooks/stop": "src/hooks/stop.ts",
