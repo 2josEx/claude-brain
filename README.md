@@ -12,10 +12,9 @@
 
 [Installation](#-installation) • [How it Works](#-how-it-works) • [Commands](#-commands) • [FAQ](#-faq)
 
-<!--
-TODO: Add demo GIF here
-![Demo](demo.gif)
--->
+[![Watch Demo](repo.gif)](https://github.com/memvid/memvid-mind/blob/main/video.mp4)
+
+*Click to watch full demo*
 
 </div>
 
