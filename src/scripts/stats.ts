@@ -5,9 +5,13 @@
  * Get memory statistics using the SDK (no CLI dependency)
  */
 
-import { use, create } from "@memvid/sdk";
 import { existsSync, statSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
+
+// Dynamic import for SDK
+async function loadSDK() {
+  return await import("@memvid/sdk");
+}
 
 function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 B";
@@ -21,6 +25,9 @@ async function main() {
   // Get memory file path
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const memoryPath = resolve(projectDir, ".claude/mind.mv2");
+
+  // Load SDK dynamically
+  const { use, create } = await loadSDK();
 
   // Auto-create if doesn't exist
   if (!existsSync(memoryPath)) {

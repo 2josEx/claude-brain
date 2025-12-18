@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-import { create, use } from '@memvid/sdk';
 import { existsSync, mkdirSync, statSync } from 'fs';
 import { resolve, dirname } from 'path';
 
+async function loadSDK() {
+  return await import('@memvid/sdk');
+}
 function formatBytes(bytes) {
   if (bytes === 0) return "0 B";
   const k = 1024;
@@ -13,6 +15,7 @@ function formatBytes(bytes) {
 async function main() {
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const memoryPath = resolve(projectDir, ".claude/mind.mv2");
+  const { use, create } = await loadSDK();
   if (!existsSync(memoryPath)) {
     console.log("No memory file found. Creating new memory at:", memoryPath);
     const memoryDir = dirname(memoryPath);

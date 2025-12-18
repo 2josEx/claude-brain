@@ -5,9 +5,13 @@
  * Search memories using the SDK (no CLI dependency)
  */
 
-import { use, create } from "@memvid/sdk";
 import { existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
+
+// Dynamic import for SDK
+async function loadSDK() {
+  return await import("@memvid/sdk");
+}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -22,6 +26,9 @@ async function main() {
   // Get memory file path
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const memoryPath = resolve(projectDir, ".claude/mind.mv2");
+
+  // Load SDK dynamically
+  const { use, create } = await loadSDK();
 
   // Auto-create if doesn't exist
   if (!existsSync(memoryPath)) {

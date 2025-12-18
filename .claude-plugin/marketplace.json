@@ -9,7 +9,7 @@
     {
       "name": "memvid-mind",
       "description": "Give Claude Code photographic memory in ONE portable file",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "source": {
         "source": "github",
         "repo": "memvid/memvid-mind"

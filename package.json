@@ -1,6 +1,6 @@
 {
   "name": "memvid-mind",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Give Claude Code photographic memory in ONE portable file",
   "type": "module",
   "main": "dist/index.js",

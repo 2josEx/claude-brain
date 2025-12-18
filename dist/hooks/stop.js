@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { use, create } from '@memvid/sdk';
 import { constants, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { access, readFile, mkdir } from 'fs/promises';
@@ -39,6 +38,16 @@ function debug(message) {
 }
 
 // src/core/mind.ts
+var sdkLoaded = false;
+var use;
+var create;
+async function loadSDK() {
+  if (sdkLoaded) return;
+  const sdk = await import('@memvid/sdk');
+  use = sdk.use;
+  create = sdk.create;
+  sdkLoaded = true;
+}
 var Mind = class _Mind {
   memvid;
   config;
@@ -53,6 +62,7 @@ var Mind = class _Mind {
    * Open or create a Mind instance
    */
   static async open(configOverrides = {}) {
+    await loadSDK();
     const config = { ...DEFAULT_CONFIG, ...configOverrides };
     const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
     const memoryPath = resolve(projectDir, config.memoryPath);

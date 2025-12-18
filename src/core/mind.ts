@@ -5,7 +5,10 @@
  * Stores everything in ONE portable .memvid file.
  */
 
-import { use, create, type Memvid } from "@memvid/sdk";
+// Use dynamic import to allow smart-install to run first
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Memvid = any;
+
 import { existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { mkdir } from "node:fs/promises";
@@ -20,6 +23,21 @@ import {
   DEFAULT_CONFIG,
 } from "../types.js";
 import { generateId, estimateTokens } from "../utils/helpers.js";
+
+// Lazy-loaded SDK functions
+let sdkLoaded = false;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let use: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let create: any;
+
+async function loadSDK(): Promise<void> {
+  if (sdkLoaded) return;
+  const sdk = await import("@memvid/sdk");
+  use = sdk.use;
+  create = sdk.create;
+  sdkLoaded = true;
+}
 
 /**
  * Mind - Claude's portable memory engine
@@ -52,6 +70,9 @@ export class Mind {
    * Open or create a Mind instance
    */
   static async open(configOverrides: Partial<MindConfig> = {}): Promise<Mind> {
+    // Load SDK dynamically (allows smart-install to run first)
+    await loadSDK();
+
     const config = { ...DEFAULT_CONFIG, ...configOverrides };
 
     // Resolve path relative to project dir (use CLAUDE_PROJECT_DIR if available)
