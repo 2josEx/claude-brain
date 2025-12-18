@@ -8,37 +8,37 @@ allowed-tools: Read, Bash
 
 Interact with Claude's persistent memory stored in `.claude/mind.mv2`.
 
-**CRITICAL: Use EXACT command syntax below. Do NOT add flags like --path that don't exist.**
+**IMPORTANT: Use the SDK scripts (not CLI). The memory file is auto-created if it doesn't exist.**
 
 ## Actions
 
 ### stats (default)
 ```bash
-memvid stats .claude/mind.mv2
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/stats.js"
 ```
 
 ### search [query]
 ```bash
-memvid find .claude/mind.mv2 --query "QUERY_HERE"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/find.js" "QUERY_HERE" 10
 ```
 
 ### ask [question]
 ```bash
-memvid ask .claude/mind.mv2 --question "QUESTION_HERE"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/ask.js" "QUESTION_HERE"
 ```
 
 ### recent
 ```bash
-memvid timeline .claude/mind.mv2 --limit 20 --reverse
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/timeline.js" 20
 ```
 
 ## Usage Examples
 
 ```
-/mind stats           → memvid stats .claude/mind.mv2
-/mind search auth     → memvid find .claude/mind.mv2 --query "auth"
-/mind ask "Why React?" → memvid ask .claude/mind.mv2 --question "Why React?"
-/mind recent          → memvid timeline .claude/mind.mv2 --limit 20 --reverse
+/mind stats           → Shows memory statistics, auto-creates file if needed
+/mind search auth     → Searches for "auth" in memories
+/mind ask "Why React?" → Asks a question about memories
+/mind recent          → Shows 20 most recent memories
 ```
 
 ## Response Format
@@ -46,4 +46,4 @@ memvid timeline .claude/mind.mv2 --limit 20 --reverse
 When displaying results:
 - Convert Unix timestamps to human-readable (Xm ago, Xh ago, Xd ago)
 - Summarize key findings in a table when appropriate
-- If file doesn't exist, say "No memories captured yet"
+- If file was just created, tell the user memories will appear as they work

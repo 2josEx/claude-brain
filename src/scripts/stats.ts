@@ -5,9 +5,9 @@
  * Get memory statistics using the SDK (no CLI dependency)
  */
 
-import { use } from "@memvid/sdk";
-import { existsSync, statSync } from "node:fs";
-import { resolve } from "node:path";
+import { use, create } from "@memvid/sdk";
+import { existsSync, statSync, mkdirSync } from "node:fs";
+import { resolve, dirname } from "node:path";
 
 function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 B";
@@ -22,10 +22,13 @@ async function main() {
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const memoryPath = resolve(projectDir, ".claude/mind.mv2");
 
+  // Auto-create if doesn't exist
   if (!existsSync(memoryPath)) {
-    console.log("No memory file found at:", memoryPath);
-    console.log("Start using Claude to build your memory!");
-    process.exit(0);
+    console.log("No memory file found. Creating new memory at:", memoryPath);
+    const memoryDir = dirname(memoryPath);
+    mkdirSync(memoryDir, { recursive: true });
+    await create(memoryPath, "basic");
+    console.log("✅ Memory initialized! Stats will appear as you work.\n");
   }
 
   try {

@@ -5,9 +5,9 @@
  * View recent memories using the SDK (no CLI dependency)
  */
 
-import { use } from "@memvid/sdk";
-import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { use, create } from "@memvid/sdk";
+import { existsSync, mkdirSync } from "node:fs";
+import { resolve, dirname } from "node:path";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -17,8 +17,13 @@ async function main() {
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   const memoryPath = resolve(projectDir, ".claude/mind.mv2");
 
+  // Auto-create if doesn't exist
   if (!existsSync(memoryPath)) {
-    console.log("No memory file found. Start using Claude to build your memory!");
+    console.log("No memory file found. Creating new memory at:", memoryPath);
+    const memoryDir = dirname(memoryPath);
+    mkdirSync(memoryDir, { recursive: true });
+    await create(memoryPath, "basic");
+    console.log("✅ Memory initialized! No memories to show yet.\n");
     process.exit(0);
   }
 
